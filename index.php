@@ -19,6 +19,9 @@
         }elseif ($data['level'] == 'siswa'){
            $_SESSION['siswa'] = $_POST['username'];
            echo "<script>alert('Selamat Datang $_POST[username]');document.location.href='siswa/index.php'</script>";
+        }elseif ($data['level'] == 'medis'){
+           $_SESSION['medis'] = $_POST['username'];
+           echo "<script>alert('Selamat Datang $_POST[username]');document.location.href='medis/index.php'</script>";
         }
       }else{
         echo "<script>alert('Username & Password Tidak Cocok');document.location.href='index.php'</script>";
@@ -92,6 +95,7 @@
                       <option value="guru">Guru UKS</option>
                       <option value="kepsek">Kepala Sekolah</option>
                       <option value="siswa">Siswa</option>
+                      <option value="medis">Medis</option>
                     </select>
                   </div>
 
