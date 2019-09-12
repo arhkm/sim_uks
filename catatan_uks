@@ -1,0 +1,39 @@
+Catatan :
+
+Alert 
+
+1.Raport Status kesehatan siswa
+-Tinggi Badan
+-berat badan 
+-IMT (indeks masa tubuh)
+-Keterangan hasil imt
+-Entry Usia
+-Saran perbaikan gizi
+
+-Rumus IMT
+ Berat badan (kg) / Tinggi Badan (m) x Tinggi Badan (m)
+
+2.Rekomendasi
+  Saran untuk siswa
+
+guru uks = pingsan dan gaya hidup, jajan di luar sekolah, klasifikasi kebugaran jasmani
+
+
+- user tambah 1 = tenaga medis bagian 2
+    menerima report excel
+	perokok atau tidak
+	report per orang
+
+
+saran perbaikan gizi (sistem)
+
+sarapan bagian siswa
+
+Tes kebugaran : input nilai 
+
+History entry siswa ditampilkan
+
+petugas uks = hasil verifikasi data entry
+
+Eksekutif report siswa kepala sekolah
+Menu pilihan
