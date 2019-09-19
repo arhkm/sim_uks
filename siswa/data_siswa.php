@@ -619,8 +619,7 @@
       </section>
       </div>
       <footer class="main-footer">
-        <div class="footer-left">
-          <!-- Copyright &copy; Arief Rahman Hakim GEN-14 RPL -->
+        <div class="footer-left"> 
         </div>
       </footer>
     </div>

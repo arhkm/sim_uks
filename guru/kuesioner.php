@@ -117,6 +117,7 @@
                        <td>Nama Lengkap</td>
                        <td>Rombel</td>
                        <td>Rayon</td>
+                       <td>Update</td>
                        <td>Aksi</td>
                      </tr>
                    </thead>
@@ -138,6 +139,7 @@
                      <td><?php echo $data['nama_lengkap'] ?></td>
                      <td><?php echo $data['rombel'] ?></td>
                      <td><?php echo $data['rayon'] ?></td>
+                     <td><?php echo $data['updated'] ?></td>
                      <td>
                        <a href="../siswa/data_siswa.php?menu=form&menu&id_kuesioner=<?php echo @$data['id_kuesioner'] ?>" target="_blank" class="btn btn-primary btn-block" name="detail">Detail</a>
                      </td>
@@ -156,7 +158,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; Arief Rahman Hakim GEN-14 RPL
+          Copyright &copy; SMK WIKRAMA BOGOR <img src="../dist/img/logo.png" alt="logo" width="30" class="shadow-light rounded-circle">
         </div>
       </footer>
     </div>

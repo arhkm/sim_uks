@@ -1,12 +1,12 @@
-<?php 
+<?php
 
   @session_start();
-  
+
   include '../config/koneksi.php';
   @$tampil = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_user WHERE username = '$_SESSION[guru]'"));
 
 
-?> 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +100,7 @@
           <div class="section-header">
             <h1>Dashboard</h1>
           </div>
-          
+
            <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
@@ -146,15 +146,15 @@
                   </div>
                 </div>
               </div>
-            </div>                  
+            </div>
           </div>
 
-          
+
         </section>
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; Kerja Proyek GEN-14 RPL
+          Copyright &copy; SMK WIKRAMA BOGOR <img src="../dist/img/logo.png" alt="logo" width="30" class="shadow-light rounded-circle">
         </div>
       </footer>
     </div>
@@ -181,11 +181,11 @@
   <script type="text/javascript">
     $(".table").DataTable();
   </script>
-  
+
   <!-- JS Libraies -->
 
   <!-- Page Specific JS File -->
-  
+
   <!-- Template JS File -->
   <script src="../dist/js/scripts.js"></script>
   <script src="../dist/js/custom.js"></script>

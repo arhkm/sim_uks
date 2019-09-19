@@ -1,12 +1,12 @@
-<?php 
+<?php
 
   @session_start();
-  
+
   include '../config/koneksi.php';
   @$tampil = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_user WHERE username = '$_SESSION[medis]'"));
 
 
-?> 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,8 +88,8 @@
           <div class="section-header">
             <h1>Laporan Siswa Sakit</h1>
           </div>
-          
-          
+
+
 
           <div class="row">
             <div class="col-sm-12">
@@ -112,7 +112,7 @@
                      </tr>
                    </thead>
                    <tbody>
-                   <?php  
+                   <?php
 
                       include '../config/koneksi.php';
 
@@ -137,7 +137,7 @@
                       }
 
                     ?>
-                   
+
                    <tr>
                      <td><?php echo $no++ ?></td>
                      <td><?php echo $data['nis'] ?></td>
@@ -148,19 +148,19 @@
                      <td><?php echo $tanggal; ?></td>
                      </tr>
                     <?php } ?>
-                   
+
                  </tbody>
                </table>
                </div>
             </div>
             </div>
           </div>
-          </div>                    
+          </div>
           </div>
 
 
           <div class="section-body">
-          <?php  
+          <?php
 
             switch (@$_GET['menu']) {
               case "lap":
@@ -169,9 +169,9 @@
               case "input_siswa":
                 include "input_siswa.php";
                 break;
-                
-              
-              
+
+
+
             }
 
           ?>
@@ -180,7 +180,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; Arief Rahman Hakim GEN-14 RPL
+          Copyright &copy; SMK WIKRAMA BOGOR <img src="../dist/img/logo.png" alt="logo" width="30" class="shadow-light rounded-circle">
         </div>
       </footer>
     </div>
@@ -207,11 +207,11 @@
   <script type="text/javascript">
     $(".table").DataTable();
   </script>
-  
+
   <!-- JS Libraies -->
 
   <!-- Page Specific JS File -->
-  
+
   <!-- Template JS File -->
   <script src="../dist/js/scripts.js"></script>
   <script src="../dist/js/custom.js"></script>

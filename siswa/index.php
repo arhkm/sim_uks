@@ -303,7 +303,7 @@
               $rombel = $tampil['rombel'];
               $rayon = $tampil['rayon'];
 
-              $sql =  "INSERT INTO tbl_kuesioner values(NULL,'$nis','$nama','$rombel','$rayon')";
+              $sql =  "INSERT INTO tbl_kuesioner values(NULL,'$nis','$nama','$rombel','$rayon',CURRENT_TIME())";
               $query = mysqli_query($con, $sql);
               //
               $sql1 = "SELECT * FROM tbl_kuesioner WHERE nis = '$nis' ";
@@ -377,14 +377,14 @@
                     <!-- Riwayat Kesehatan anak -->
                     <tr>
                       <td> Alergi Makanan Tertentu </td>
-                      <td> <input type="radio" name="satu" value="Tidak"> </td>
+                      <td> <input type="radio" checked="checked" name="satu" value="Tidak"> </td>
                       <td> <input type="radio" name="satu" value="Ya"></td>
                       <td> <input type="text" name="sebutkan_alergi" id="sebutkan_alergi" hidden > </td>
                     </tr>
 
                     <tr>
                       <td> Alergi Obat Tertentu </td>
-                      <td> <input type="radio" name="dua" value="Tidak"> </td>
+                      <td> <input type="radio" checked="checked" name="dua" value="Tidak"> </td>
                       <td> <input type="radio" name="dua" value="Ya"> </td>
                       <td><input type="text" name="sebutkan_obat" id="sebutkan_obat" hidden> </td>
                     </tr>
@@ -393,7 +393,7 @@
                       <td>
                         Pernah mengalami cedera serius akibat kecelakaan
                         (geger otak/patah tulang/lainnya)   </td>
-                      <td> <input type="radio" name="tiga" value="Tidak"> </td>
+                      <td> <input type="radio" checked="checked" name="tiga" value="Tidak"> </td>
                       <td> <input type="radio" name="tiga" value="Ya"> </td>
                       <td> <input type="text" name="sebutkan_geger" id="sebutkan_geger" hidden> </td>
                     </tr>
@@ -421,14 +421,14 @@
 
                     <tr>
                       <td>   Riwayat kelainan bawaan yang dimiliki </td>
-                      <td> <input type="radio" name="tujuh" value="Tidak"> </td>
+                      <td> <input type="radio" checked="checked" name="tujuh" value="Tidak"> </td>
                       <td> <input type="radio" name="tujuh" value="Ya"> </td>
                       <td><input type="text" name="sebutkan_kelainan" id="sebutkan_kelainan" hidden></td>
                     </tr>
 
                     <tr>
                       <td> Riwayat penyakit lainnya </td>
-                      <td> <input type="radio" name="delapan" value="Tidak"> </td>
+                      <td> <input type="radio" checked="checked" name="delapan" value="Tidak"> </td>
                       <td> <input type="radio" name="delapan" value="Ya"> </td>
                       <td class="sebutkan5"><input type="text" name="sebutkan_penyakit_lainnya" id="sebutkan_penyakit_lainnya" hidden></td>
                     </tr>
@@ -620,14 +620,15 @@
                     </tr>
 
                     <!-- Riwayat Kesehatan anak -->
+                    <?php if($tampil['jk'] == "P"){ ?>
                     <tr>
-                      <td> Masalah pubertas </td>
+                      <td> Masalah pubertas <br>Ket: <p style="color:red;">Jika menstruasi pertama umurnya < 8 tahun atau > 15 tahun pilih "YA" <br> <span style="color:green">Jika menstruasi pertama 8 - 15 tahun pilih "TIDAK"</span></p></td>
                       <td> <input type="radio" checked="checked" name="tigapuluh" value="Tidak"> </td>
                       <td> <input type="radio" name="tigapuluh" value="Ya"> </td>
                     </tr>
 
                     <tr>
-                      <td> Risiko IMS </td>
+                      <td> Risiko IMS <br>Ket: <p style="color:red;">Jika pernah mengalami keputihan atau gatal-gatal disekitar kemaluan, maka pilih "YA" <br> <span style="color:green">Jika tidak mengalami pilih "TIDAK" </span> </p> </td>
                       <td> <input type="radio" checked="checked" name="tigasatu" value="Tidak"> </td>
                       <td> <input type="radio" name="tigasatu" value="Ya"> </td>
                     </tr>
@@ -637,13 +638,29 @@
                       <td> <input type="radio" checked="checked" name="tigadua" value="Tidak"> </td>
                       <td> <input type="radio" name="tigadua" value="Ya"> </td>
                     </tr>
-                    <?php if($tampil['jk'] == "P"){ ?>
                     <tr>
-                      <td> Gangguan menstruasi </td>
+                      <td> Gangguan menstruasi <br>ket: <p style="color:red;">Jika menstruasinya tidak teratur dan atau disertai nyeri perut hebat, pilih "YA"</p> </td>
                       <td> <input type="radio" checked="checked" name="tigatiga" value="Tidak"> </td>
                       <td> <input type="radio" name="tigatiga" value="Ya"> </td>
                     </tr>
-                  <?php }else{?>
+                  <?php }else if($tampil['jk'] == "L"){?>
+                    <tr>
+                      <td> Masalah pubertas <br>Ket: <p style="color:red;">Jika sudah berusia > 14 tahun belum pernah mimpi basah, pilih "YA" <br> <span style="color:green">Jika berusia < 14 tahun pilih "TIDAK"</span> </p></td>
+                      <td> <input type="radio" checked="checked" name="tigapuluh" value="Tidak"> </td>
+                      <td> <input type="radio" name="tigapuluh" value="Ya"> </td>
+                    </tr>
+
+                    <tr>
+                      <td> Risiko IMS <br>Ket: <p style="color:red;">Jika pernah mengalami kencing kuning, kental, seperti nanah <br> dan pernah mengalami gatal-gatal disekitar kemaluan. Maka pilih "YA" <br> <span style="color:green"> Jika tidak mengalami pilih "TIDAK"</span> </p> </td>
+                      <td> <input type="radio" checked="checked" name="tigasatu" value="Tidak"> </td>
+                      <td> <input type="radio" name="tigasatu" value="Ya"> </td>
+                    </tr>
+
+                    <tr>
+                      <td> Risiko kekerasan seksual </td>
+                      <td> <input type="radio" checked="checked" name="tigadua" value="Tidak"> </td>
+                      <td> <input type="radio" name="tigadua" value="Ya"> </td>
+                    </tr>
                   <?php } ?>
                   </table>
 
@@ -734,41 +751,42 @@
                       <td colspan="3" style="font-weight: bold;"->II. Pemeriksaan Fisik oleh Tenaga Kesehatan, dibantu Guru dan Kader Kesehatan</td>
                     </tr>
                     <tr>
-                      <td style="font-weight: bold;">A. Pemeriksaan Tanda-tanda Vital</td>
-                      <td colspan="2" align="center">Keterangan</td>
+                      <td style="font-weight: bold;background-color:#dadfe1;">A. Pemeriksaan Tanda-tanda Vital</td>
+                      <td style="background-color:#dadfe1;" colspan="2" align="center">Keterangan</td>
+
                     </tr>
 
                     <!-- Pemeriksaan Tanda-tanda Vital -->
                     <tr>
-                      <td>Tekanan darah</td>
-                      <td style="background-color:red;" colspan="2"><input type="text" name="empattiga" class="form-control" style="display:inherit; width:89%;" hidden> mm Hg</td>
+                      <td style="background-color:#dadfe1;">Tekanan darah</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="text" name="empattiga" class="form-control" style="display:inherit; width:89%;" hidden> mm Hg</td>
                     </tr>
 
                     <tr>
-                      <td>Denyut nadi</td>
-                      <td style="background-color:red;" colspan="2"><input type="text" name="empatempat" class="form-control" style="display:inherit; width:89%;" hidden>&nbsp; / menit</td>
+                      <td style="background-color:#dadfe1;">Denyut nadi</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="text" name="empatempat" class="form-control" style="display:inherit; width:89%;" hidden>&nbsp; / menit</td>
                     </tr>
 
                     <tr>
-                      <td>Frekuensi pernapasan</td>
-                      <td style="background-color:red;" colspan="2"><input type="text" name="empatlima" class="form-control" style="display:inherit; width:89%;" hidden>&nbsp; / menit</td>
+                      <td style="background-color:#dadfe1;">Frekuensi pernapasan</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="text" name="empatlima" class="form-control" style="display:inherit; width:89%;" hidden>&nbsp; / menit</td>
                     </tr>
 
                     <tr>
-                      <td>Suhu</td>
-                      <td style="background-color:red;" colspan="2"><input type="text" name="empatenam" class="form-control" style="display:inherit; width:89%;" hidden>&nbsp; °C</td>
+                      <td style="background-color:#dadfe1;">Suhu</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="text" name="empatenam" class="form-control" style="display:inherit; width:89%;" hidden>&nbsp; °C</td>
                     </tr>
 
                     <tr>
-                      <td>Bising jantung</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="empattujuh" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="empattujuh" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Bising jantung</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="empattujuh" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="empattujuh" value="Ya"> Ya</td>
                     </tr>
 
                     <tr>
-                      <td>Bising paru</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="empatdelapan" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="empatdelapan" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Bising paru</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="empatdelapan" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="empatdelapan" value="Ya"> Ya</td>
                     </tr>
                   </table>
 
@@ -801,8 +819,8 @@
 
                     <!-- <tr>
                       <td> TB/U (Stunting) </td>
-                      <td style="background-color:red;"> <input type="radio" disabled="true" name="limatiga" value="Tidak"> Tidak </td>
-                      <td style="background-color:red;"> <input type="radio" disabled="true" name="limatiga" value="Ya"> Ya </td>
+                      <td style="background-color:#dadfe1;"> <input type="radio" disabled="true" name="limatiga" value="Tidak"> Tidak </td>
+                      <td style="background-color:#dadfe1;"> <input type="radio" disabled="true" name="limatiga" value="Ya"> Ya </td>
                     </tr>
 
                     <tr>
@@ -810,244 +828,244 @@
                         ( conjungtiva / kelopak mata bag dalam bawah pucat, bibir, lidah,
                         <p>telapak tangan pucat )</p>
                       </td>
-                      <td style="background-color:red;"> <input type="radio" disabled="true" name="limaempat" value="Tidak"> Tidak </td>
-                      <td style="background-color:red;"> <input type="radio" disabled="true" name="limaempat" value="Ya"> Ya </td>
+                      <td style="background-color:#dadfe1;"> <input type="radio" disabled="true" name="limaempat" value="Tidak"> Tidak </td>
+                      <td style="background-color:#dadfe1;"> <input type="radio" disabled="true" name="limaempat" value="Ya"> Ya </td>
                     </tr> -->
                   </table>
 
                   <table  class="table table-bordered table-hover">
                     <tr>
-                      <td style="font-weight: bold;">C. Pemeriksaan Kebersihan Diri</td>
-                      <td colspan="2" align="center">Keterangan</td>
+                      <td style="font-weight: bold; background-color:#dadfe1;">C. Pemeriksaan Kebersihan Diri</td>
+                      <td style="background-color:#dadfe1;" colspan="2" align="center">Keterangan</td>
                     </tr>
 
                     <!-- Pemeriksaan Kebersihan Diri  -->
 
                     <tr>
-                      <td>Rambut</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="limalima" value="Tidak Sehat"> Tidak Sehat</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="limalima" value="Sehat"> Sehat</td>
+                      <td style="background-color:#dadfe1;">Rambut</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="limalima" value="Tidak Sehat"> Tidak Sehat</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="limalima" value="Sehat"> Sehat</td>
                     </tr>
                     <tr>
-                      <td>Kulit berbecak keputihan, <p>kemerahan / kehitaman</p> </td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="limaenam" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="limaenam" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kulit berbecak keputihan, <p>kemerahan / kehitaman</p> </td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="limaenam" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="limaenam" value="Ya"> Ya</td>
                     </tr>
                     <tr>
-                      <td>Kulit bersisik</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="limatujuh" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="limatujuh" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kulit bersisik</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="limatujuh" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="limatujuh" value="Ya"> Ya</td>
                     </tr>
                     <tr>
-                      <td>Kulit ada memar</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="limadelapan" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="limadelapan" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kulit ada memar</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="limadelapan" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="limadelapan" value="Ya"> Ya</td>
                     </tr>
                     <tr>
-                      <td>Kulit ada luka sayatan</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="limasembilan" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="limasembilan" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kulit ada luka sayatan</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="limasembilan" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="limasembilan" value="Ya"> Ya</td>
                     </tr>
                     <tr>
-                      <td>Kulit ada luka koreng</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="enampuluh" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="enampuluh" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kulit ada luka koreng</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="enampuluh" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="enampuluh" value="Ya"> Ya</td>
                     </tr>
                     <tr>
-                      <td>Kulit ada luka koreng sukar sembuh</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="enamsatu" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="enamsatu" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kulit ada luka koreng sukar sembuh</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="enamsatu" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="enamsatu" value="Ya"> Ya</td>
                     </tr>
                     <tr>
-                      <td>Kulit ada bekas suntikan</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="enamdua" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="enamdua" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kulit ada bekas suntikan</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="enamdua" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="enamdua" value="Ya"> Ya</td>
                     </tr>
                     <tr>
-                      <td>Kuku</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="enamtiga" value="Tidak Sehat"> Tidak Sehat</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="enamtiga" value="Ya"> Sehat</td>
-                    </tr>
-                  </table>
-
-                  <table class="table table-bordered table-hover">
-                    <tr>
-                      <td style="font-weight: bold;">D. Pemeriksaan Kesehatan Penglihatan</td>
-                      <td colspan="4" align="center">Keterangan</td>
-                    </tr>
-
-                    <tr>
-                      <td>Mata Luar</td>
-                      <td style="background-color:red;" colspan="2"><input type="radio" disabled="true" name="enamempat" value="Normal"> Normal</td>
-                      <td style="background-color:red;" colspan="2"><input type="radio" disabled="true" name="enamempat" value="Tidak Sehat"> Tidak Sehat</td>
-                    </tr>
-                    <tr>
-                      <td>Tajam Penglihatan</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="enamlima" value="Normal"> Normal</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="enamlima" value="Low Vision">Low Vision</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="enamlima" value="Kelainan Refraksi">Kelainan Refraksi</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="enamlima" value="Kebutaan">Kebutaan</td>
-                    </tr>
-                    <tr>
-                      <td>Buta Warna</td>
-                      <td style="background-color:red;" colspan="2"><input type="radio" disabled="true" name="enamenam" value="Tidak"> Tidak</td>
-                      <td style="background-color:red;" colspan="2"><input type="radio" disabled="true" name="enamenam" value="Ya"> Ya</td>
+                      <td style="background-color:#dadfe1;">Kuku</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="enamtiga" value="Tidak Sehat"> Tidak Sehat</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="enamtiga" value="Ya"> Sehat</td>
                     </tr>
                   </table>
 
                   <table class="table table-bordered table-hover">
                     <tr>
-                      <td style="font-weight: bold;">E. Pemeriksaan Kesehatan Pendengaran</td>
-                      <td colspan="3" align="center">Keterangan</td>
+                      <td style="font-weight: bold; background-color:#dadfe1;">D. Pemeriksaan Kesehatan Penglihatan</td>
+                      <td style="background-color:#dadfe1;"colspan="4" align="center">Keterangan</td>
                     </tr>
 
                     <tr>
-                      <td>Telinga luar</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="enamtujuh" value="Sehat">Sehat</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="enamtujuh" value="Infeksi"> Infeksi</td>
-                      <td style="background-color:red;"><input type="radio" disabled="true" name="enamtujuh" value="Serumen"> Serumen</td>
+                      <td style="background-color:#dadfe1;">Mata Luar</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="radio" disabled="true" name="enamempat" value="Normal"> Normal</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="radio" disabled="true" name="enamempat" value="Tidak Sehat"> Tidak Sehat</td>
                     </tr>
                     <tr>
-                      <td>Tajam Pendengaran</td>
-                      <td style="background-color:red;"><input type="radio" name="enamdelapan" value="Normal"> Normal</td>
-                      <td style="background-color:red;"><input type="radio" name="enamdelapan" value="Ada Gangguan"> Ada Gangguan</td>
-                      <td style="background-color:red;"><input type="text" class="form-control" name="ada_gangguan" id="ada_gangguan" hidden></td>
+                      <td style="background-color:#dadfe1;">Tajam Penglihatan</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="enamlima" value="Normal"> Normal</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="enamlima" value="Low Vision">Low Vision</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="enamlima" value="Kelainan Refraksi">Kelainan Refraksi</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="enamlima" value="Kebutaan">Kebutaan</td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Buta Warna</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="radio" disabled="true" name="enamenam" value="Tidak"> Tidak</td>
+                      <td style="background-color:#dadfe1;" colspan="2"><input type="radio" disabled="true" name="enamenam" value="Ya"> Ya</td>
                     </tr>
                   </table>
 
                   <table class="table table-bordered table-hover">
                     <tr>
-                      <td rowspan="2" style="font-weight: bold;">F. Pemeriksaan Kesehatan Gigi dan Mulut</td>
-                      <td colspan="3" align="center">Keterangan</td>
-                    </tr>
-                    <tr>
-                      <td>Tidak</td>
-                      <td>Ya</td>
-                      <td>Lainnya</td>
-                    </tr>
-                    <tr>
-                      <td>Celah bibir / langit-langit*</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="enamsembilan" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="enamsembilan" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="font-weight: bold;background-color:#dadfe1;">E. Pemeriksaan Kesehatan Pendengaran</td>
+                      <td style="background-color:#dadfe1;" colspan="3" align="center">Keterangan</td>
                     </tr>
 
                     <tr>
-                      <td>Luka pada sudut mulut</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhpuluh" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhpuluh" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="background-color:#dadfe1;">Telinga luar</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="enamtujuh" value="Sehat">Sehat</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="enamtujuh" value="Infeksi"> Infeksi</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled="true" name="enamtujuh" value="Serumen"> Serumen</td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Tajam Pendengaran</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" name="enamdelapan" value="Normal"> Normal</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" name="enamdelapan" value="Ada Gangguan"> Ada Gangguan</td>
+                      <td style="background-color:#dadfe1;"><input type="text" class="form-control" name="ada_gangguan" id="ada_gangguan" hidden></td>
+                    </tr>
+                  </table>
+
+                  <table class="table table-bordered table-hover">
+                    <tr>
+                      <td rowspan="2" style="font-weight: bold; background-color:#dadfe1;">F. Pemeriksaan Kesehatan Gigi dan Mulut</td>
+                      <td colspan="3" style="background-color:#dadfe1;" align="center">Keterangan</td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Tidak</td>
+                      <td style="background-color:#dadfe1;">Ya</td>
+                      <td style="background-color:#dadfe1;">Lainnya</td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Celah bibir / langit-langit*</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="enamsembilan" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="enamsembilan" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
 
                     <tr>
-                      <td>Sariawan</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhsatu" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhsatu" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="background-color:#dadfe1;">Luka pada sudut mulut</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhpuluh" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhpuluh" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
 
                     <tr>
-                      <td>Lidah kotor</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhdua" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhdua" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="background-color:#dadfe1;">Sariawan</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhsatu" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhsatu" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
 
                     <tr>
-                      <td>Luka lainnya</td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhtiga" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhtiga" value="Ya"></td>
-                      <td style="background-color:red;"><input type="text"  class="form-control" name="IIFlokasi_luka_lainnya" id="IIF5" hidden></td>
+                      <td style="background-color:#dadfe1;">Lidah kotor</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhdua" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhdua" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
+                    </tr>
+
+                    <tr>
+                      <td style="background-color:#dadfe1;">Luka lainnya</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhtiga" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhtiga" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"><input type="text"  class="form-control" name="IIFlokasi_luka_lainnya" id="IIF5" hidden></td>
                     </tr>
                     <!-- Gigi -->
                     <tr>
-                      <td>Gigi berlubang / karies</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhempat" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhempat" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="background-color:#dadfe1;">Gigi berlubang / karies</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhempat" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhempat" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
                     <tr>
-                      <td>Gusi mudah berdarah</td>
-                      <td style="background-color:red;" ><input type="radio" disabled checked="checked" name="tujuhlima" value="Tidak"></td>
-                      <td style="background-color:red;" ><input type="radio" disabled name="tujuhlima" value="Ya"></td>
-                      <td style="background-color:red;" ></td>
+                      <td style="background-color:#dadfe1;">Gusi mudah berdarah</td>
+                      <td style="background-color:#dadfe1;" ><input type="radio" disabled checked="checked" name="tujuhlima" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;" ><input type="radio" disabled name="tujuhlima" value="Ya"></td>
+                      <td style="background-color:#dadfe1;" ></td>
                     </tr>
                     <tr>
-                      <td>Gusi bengkak</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhenam" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhenam" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="background-color:#dadfe1;">Gusi bengkak</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhenam" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhenam" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
                     <tr>
-                      <td>Gigi kotor (ada plak & sisa makanan)</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhtujuh" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhtujuh" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="background-color:#dadfe1;">Gigi kotor (ada plak & sisa makanan)</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhtujuh" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhtujuh" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
                     <tr>
-                      <td>Karang gigi</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhdelapan" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhdelapan" value="Ya"></td>
-                      <td style="background-color:red;"></td>
+                      <td style="background-color:#dadfe1;">Karang gigi</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhdelapan" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhdelapan" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
                     <tr>
-                      <td>Susunan gigi depan tidak teratur</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="tujuhsembilan" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="tujuhsembilan" value="Ya"></td>
-                      <td style="background-color:red;"></td>
-                    </tr>
-                  </table>
-
-                  <table class="table table-bordered table-hover">
-                    <tr>
-                      <td rowspan="2" style="font-weight: bold;">G. Pemakaian Alat Bantu</td>
-                      <td colspan="2" align="center">Keterangan</td>
-                    </tr>
-                    <tr>
-                      <td>Tidak</td>
-                      <td>Ya</td>
-                    </tr>
-                    <tr>
-                      <td>Penglihatan / Loupe</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="delapanpuluh" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="delapanpuluh" value="Ya"></td>
-                    </tr>
-                    <tr>
-                      <td>Pendengaran</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="delapansatu" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="delapansatu" value="Ya"></td>
-                    </tr>
-                    <tr>
-                      <td>Kursi roda</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="delapandua" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="delapandua" value="Ya"></td>
-                    </tr>
-                    <tr>
-                      <td>Tongkat / Kurk</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="delapantiga" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="delapantiga" value="Ya"></td>
-                    </tr>
-                    <tr>
-                      <td>Kaki / tangan / mata protese</td>
-                      <td style="background-color:red;"><input type="radio" disabled checked="checked" name="delapanempat" value="Tidak"></td>
-                      <td style="background-color:red;"><input type="radio" disabled name="delapanempat" value="Ya"></td>
+                      <td style="background-color:#dadfe1;">Susunan gigi depan tidak teratur</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="tujuhsembilan" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="tujuhsembilan" value="Ya"></td>
+                      <td style="background-color:#dadfe1;"></td>
                     </tr>
                   </table>
 
                   <table class="table table-bordered table-hover">
                     <tr>
-                      <td style="font-weight: bold;">H. Pemeriksaan Kebugaran jasmani</td>
-                      <td align="center">Keterangan</td>
+                      <td rowspan="2" style="font-weight: bold;background-color:#dadfe1;">G. Pemakaian Alat Bantu</td>
+                      <td colspan="2" style="background-color:#dadfe1;" align="center">Keterangan</td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Tidak</td>
+                      <td style="background-color:#dadfe1;">Ya</td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Penglihatan / Loupe</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="delapanpuluh" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="delapanpuluh" value="Ya"></td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Pendengaran</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="delapansatu" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="delapansatu" value="Ya"></td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Kursi roda</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="delapandua" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="delapandua" value="Ya"></td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Tongkat / Kurk</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="delapantiga" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="delapantiga" value="Ya"></td>
+                    </tr>
+                    <tr>
+                      <td style="background-color:#dadfe1;">Kaki / tangan / mata protese</td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled checked="checked" name="delapanempat" value="Tidak"></td>
+                      <td style="background-color:#dadfe1;"><input type="radio" disabled name="delapanempat" value="Ya"></td>
+                    </tr>
+                  </table>
+
+                  <table class="table table-bordered table-hover">
+                    <tr>
+                      <td style="font-weight: bold; background-color:#dadfe1;">H. Pemeriksaan Kebugaran Jasmani (Tes Lari 2.400 meter)</td>
+                      <td style="background-color:#dadfe1;" align="center">Keterangan</td>
                     </tr>
 
                     <tr>
-                      <td>Jumlah nilai</td>
-                      <td style="background-color:red;"><input type="number" disabled class="form-control" checked="checked" name="delapanlima" value=""></td>
+                      <td style="background-color:#dadfe1;">Jumlah nilai</td>
+                      <td style="background-color:#dadfe1;"><input type="number" disabled class="form-control" checked="checked" name="delapanlima" value=""></td>
                     </tr>
 
                     <tr>
-                      <td>Klarifikasi tingkat kebugaran jasmani daya tahan <p>tahan jantung-paru dengan single tes</p> </td>
-                      <td style="background-color:red;"><input type="text" disabled="true" class="form-control" name="delapanenam" value=""></td>
+                      <td style="background-color:#dadfe1;">Klarifikasi tingkat kebugaran jasmani daya tahan <p>tahan jantung-paru dengan single tes</p> </td>
+                      <td style="background-color:#dadfe1;"><input type="text" disabled="true" class="form-control" name="delapanenam" value=""></td>
                     </tr>
                   </table>
 
@@ -1137,7 +1155,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; Arief Rahman Hakim GEN-14 RPL
+          Copyright &copy; SMK WIKRAMA BOGOR <img src="../dist/img/logo.png" alt="logo" width="30" class="shadow-light rounded-circle">
         </div>
       </footer>
     </div>
