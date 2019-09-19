@@ -5,26 +5,16 @@
 
     if(isset($_POST['login']))
     {
-      @$sql = mysqli_query($con, "SELECT * FROM tbl_user where username='$_POST[username]' AND password='$_POST[password]' AND level='$_POST[level]'");
+      @$sql = mysqli_query($con, "SELECT * FROM tbl_siswa_login where nis='$_POST[username]' AND nis='$_POST[password]' ");
       @$cek = mysqli_num_rows($sql);
       @$data = mysqli_fetch_array($sql);
 
       if($cek > 0){
-        if($data['level'] == 'guru'){
-          $_SESSION['guru'] = $_POST['username'];
-          echo "<script>alert('Selamat Datang $_POST[username]');document.location.href='guru/index.php'</script>";
-        }elseif ($data['level'] == 'kepsek') {
-          $_SESSION['kepsek'] = $_POST['username'];
-          echo "<script>alert('Selamat Datang $_POST[username]');document.location.href='kepsek/index.php'</script>";
-        }elseif ($data['level'] == 'siswa'){
-           $_SESSION['siswa'] = $_POST['username'];
-           echo "<script>alert('Selamat Datang $_POST[username]');document.location.href='siswa/index.php'</script>";
-        }elseif ($data['level'] == 'medis'){
-           $_SESSION['medis'] = $_POST['username'];
-           echo "<script>alert('Selamat Datang $_POST[username]');document.location.href='medis/index.php'</script>";
-        }
+           $_SESSION['nis'] = $_POST['username'];
+           $_SESSION['jk'] = $data['jk'];
+           echo "<script>alert('Selamat Datang $data[nama]');document.location.href='siswa/index.php'</script>";
       }else{
-        echo "<script>alert('Username & Password Tidak Cocok');document.location.href='index.php'</script>";
+           echo "<script>alert('Username & Password Tidak Cocok');document.location.href='index.php'</script>";
       }
 
     }
@@ -50,7 +40,7 @@
     #backLogin{
       background: url(dist/img/piringku.jpg);
       background-repeat: no-repeat;
-      background-size: 70% 100%;
+      background-size: 70% 110%;
     }
   </style>
 </head>
@@ -87,17 +77,6 @@
                       please fill in your password
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <label for="email">Masuk Sebagai</label>
-                    <select class="form-control" name="level">
-                      <option value=""></option>
-                      <option value="guru">Guru UKS</option>
-                      <option value="kepsek">Kepala Sekolah</option>
-                      <option value="medis">Medis</option>
-                    </select>
-                  </div>
-
                   <div class="form-group">
                     <button type="submit" name="login"  class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login

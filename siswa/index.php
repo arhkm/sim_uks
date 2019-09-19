@@ -1,9 +1,9 @@
 <?php
-
+  error_reporting(0);
   @session_start();
 
   include '../config/koneksi.php';
-  @$tampil = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_user WHERE username = '$_SESSION[siswa]'"));
+  @$tampil = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_siswa_login WHERE nis = '$_SESSION[nis]'"));
 
   // if(isset($_SESSION['pos']))
   // {
@@ -21,7 +21,7 @@
 
      // $sebutkan = $_POST['sebutkan'];
      $arr = [];
-     $kuesioner[] = array(
+     $kuesioner = array(
        'tahapI' => array(
          'tahap' => 'I',
          'bagianA' => array(
@@ -242,7 +242,7 @@
         <ul class="navbar-nav navbar-right">
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <img alt="image" src="../dist/img/avatar/avatar-1.png" width="30" class="rounded-circle mr-1">
-            <div class="d-sm-none d-lg-inline-block"><?php echo @$tampil['nama_lengkap']; ?></div></a>
+            <div class="d-sm-none d-lg-inline-block"><?php echo @$tampil['nama']; ?></div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
               <a href="#" class="dropdown-item has-icon">
@@ -297,10 +297,11 @@
 
             if(isset($_POST['simpan']))
             {
-              $nis = $_POST['nis'];
-              $nama = $_POST['nama'];
-              $rombel = $_POST['rombel'];
-              $rayon = $_POST['rayon'];
+
+              $nis = $tampil['nis'];
+              $nama = $tampil['nama'];
+              $rombel = $tampil['rombel'];
+              $rayon = $tampil['rayon'];
 
               $sql =  "INSERT INTO tbl_kuesioner values(NULL,'$nis','$nama','$rombel','$rayon')";
               $query = mysqli_query($con, $sql);
@@ -317,10 +318,10 @@
 
               // print_r($query1);
               if($query){
-                 echo "<pre>";
-                 print_r($kuesioner_response);
-                 echo "</pre>";
-                // echo "<script>alert('Berhasil Tambah Data');document.location.href='?menu=input_kuesioner'</script>";
+                 // echo "<pre>";
+                 // print_r($kuesioner_response);
+                 // echo "</pre>";
+                echo "<script>alert('Berhasil Tambah Data');document.location.href='?menu=input_kuesioner'</script>";
               }else{
                 echo "<script>alert('Gagal Tambah Data');document.location.href='?menu=input_kuesioner'</script>";
 
@@ -341,19 +342,19 @@
                     <form action="" method="post">
                     <div class="form-group">
                        <label for="nis">Nis</label>
-                       <input type="number" name="nis" class="form-control" required autocomplete="off">
+                       <input type="number" name="nis" disabled class="form-control" required autocomplete="off" value="<?php echo $tampil['nis']; ?>">
                     </div>
                     <div class="form-group">
                        <label for="nama">Nama Lengkap</label>
-                       <input type="text" name="nama" class="form-control" required autocomplete="off">
+                       <input type="text" name="nama" disabled class="form-control" required autocomplete="off" value="<?php echo $tampil['nama']; ?>">
                     </div>
                     <div class="form-group">
                        <label for="rombel">Rombel</label>
-                       <input type="text" name="rombel" class="form-control" required autocomplete="off">
+                       <input type="text" name="rombel" disabled class="form-control" required autocomplete="off" value="<?php echo $tampil['rombel']; ?>">
                     </div>
                     <div class="form-group">
                        <label for="rayon">Rayon</label>
-                       <input type="text" name="rayon" class="form-control" required autocomplete="off">
+                       <input type="text" name="rayon" disabled class="form-control" required autocomplete="off" value="<?php echo $tampil['rayon']; ?>">
                     </div>
                   </div>
                   </fieldset>
@@ -636,12 +637,14 @@
                       <td> <input type="radio" checked="checked" name="tigadua" value="Tidak"> </td>
                       <td> <input type="radio" name="tigadua" value="Ya"> </td>
                     </tr>
-
+                    <?php if($tampil['jk'] == "P"){ ?>
                     <tr>
                       <td> Gangguan menstruasi </td>
                       <td> <input type="radio" checked="checked" name="tigatiga" value="Tidak"> </td>
                       <td> <input type="radio" name="tigatiga" value="Ya"> </td>
                     </tr>
+                  <?php }else{?>
+                  <?php } ?>
                   </table>
 
                   <!-- Kesehatan mental emosional skor kesulitan -->
