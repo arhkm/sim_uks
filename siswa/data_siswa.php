@@ -1,8 +1,8 @@
-<?php 
-  
+<?php
+
   error_reporting(0);
   @session_start();
-	
+
 
   include '../fpdf/fpdf.php';
 
@@ -11,7 +11,7 @@
   	 header('Location:cetak.php');
   }
 
-?> 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +41,7 @@
           </ul>
         </form>
         <ul class="navbar-nav navbar-right">
-          
+
         </ul>
       </nav>
       <!-- <div class="main-sidebar"> -->
@@ -72,8 +72,8 @@
             <h1>Data Kuesioner Siswa</h1>
           </div>
           </div>
-          
-          <?php  
+
+          <?php
 
             include '../config/koneksi.php';
             // include '../library/controllers.php';
@@ -93,7 +93,16 @@
             $query = mysqli_query($con,"select * from tbl_kuesioner WHERE id_kuesioner = '$_GET[id_kuesioner]' ");
             $data  = mysqli_fetch_assoc($query);
 
+            $query1 = mysqli_query($con,"select * from tbl_detail_kuesioner WHERE id_kuesioner = '$_GET[id_kuesioner]' ");
+            $data_kuesioner  = mysqli_fetch_assoc($query1);
+
+            $response = json_decode($data_kuesioner['kuesioner'], true);
+            // echo "<pre>";
+            // print_r($response['tahapI']['bagianA']);
+            // echo "</pre>";
+
           ?>
+
 
 <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
@@ -118,7 +127,7 @@
                 			<td>Rayon</td>
                 			<td><?php echo $data['rayon'] ?></td>
                 		</tr>
-                		
+
                 	</thead>
                 </table>
 
@@ -126,553 +135,462 @@
                 	<h3>Laporan Kuesioner</h3>
                 	<thead>
                     <tr>
-                      <td>A. Riwayat Kesehatan Anak</td>
-                      <td>Keterangan</td>
+                      <td style="font-weight:bold; font-size:18px;">A. Riwayat Kesehatan Anak</td>
+                      <td style="font-weight:bold; font-size:18px;">Keterangan</td>
                     </tr>
                 		<tr>
                 			<td>Alergi Makanan Tertentu</td>
                 			<td>
-                				
-                				<?php 
-                				   if($_SESSION['alergi'] != ""){
-                				   	 	echo @$_SESSION['alergi'];
-                				   } 
-                				 ?>
-                					
+
+                        <?php
+                          foreach ($response['tahapI']['bagianA']['alergi'] as $key => $value) {
+                            echo $value." ";
+                          }
+                         ?>
+
                 			</td>
                 		</tr>
                     <tr>
                       <td>Alergi Obat Tertentu</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['obat'] != ""){
-                              echo $_SESSION['obat'];
-                           } 
+
+                        <?php
+                          foreach ($response['tahapI']['bagianA']['obat'] as $key => $value) {
+                            echo $value." ";
+                          }
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Pernah mengalami cedera serius akibat kecelakaan
                         (geger otak/patah tulang/lainnya)</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['geger'] != ""){
-                              echo @$_SESSION['geger'];
-                           } 
+
+                        <?php
+                          foreach ($response['tahapI']['bagianA']['geger'] as $key => $value) {
+                            echo $value." ";
+                          }
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Riwayat kejang berulang</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['kejang'] != ""){
-                              echo @$_SESSION['kejang'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianA']['kejang'];
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Riwayat pingsan</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['pingsan'] != ""){
-                              echo @$_SESSION['pingsan'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianA']['pingsan'];
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Riwayat tranfusi darah berulang</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['tranfusi'] != ""){
-                              echo @$_SESSION['tranfusi'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianA']['transfusi'];
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Riwayat kelainan bawaan yang dimiliki</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['kelainan'] != ""){
-                              echo @$_SESSION['kelainan'];
-                           } 
+
+                        <?php
+                          foreach ($response['tahapI']['bagianA']['kelainan'] as $key => $value) {
+                            echo $value." ";
+                          }
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Riwayat penyakit lainnya</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['penyakit_lainnya'] != ""){
-                              echo @$_SESSION['penyakit_lainnya'];
-                           } 
+
+                        <?php
+                          foreach ($response['tahapI']['bagianA']['penyakit_lainnya'] as $key => $value) {
+                            echo $value." ";
+                          }
                          ?>
-                          
+
                       </td>
                     </tr>
 
                     <!-- Riwayat Imunisasi -->
                     <tr>
-                      <td>B . Riwayat Imunisasi</td>
-                      <td>Keterangan</td>
+                      <td style="font-weight:bold; font-size:18px;" style="font-weight:bold; font-size:18px;">B . Riwayat Imunisasi</td>
+                      <td style="font-weight:bold; font-size:18px;" style="font-weight:bold; font-size:18px;">Keterangan</td>
                     </tr>
                     <tr>
                       <td>Memiliki catatan imunisasi</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['catatan_imunisasi'] != ""){
-                              echo @$_SESSION['catatan_imunisasi'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianB']['catatan_imunisasi'];
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Saat bayi mendapat imunisasi</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['bayi'] != ""){
-                              echo @$_SESSION['bayi'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianB']['bayi'];
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Saat SD kelas 1 mendapat imunisasi</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['kelas1'] != ""){
-                              echo @$_SESSION['kelas1'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianB']['kelas1SD'];
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Saat SD kelas 2 mendapat imunisasi</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['kelas2'] != ""){
-                              echo @$_SESSION['kelas2'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianB']['kelas2SD'];
                          ?>
-                          
+
                       </td>
                     </tr>
                     <tr>
                       <td>Saat SD kelas 3 mendapat imunisasi</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['kelas3'] != ""){
-                              echo @$_SESSION['kelas3'];
-                           } 
+
+                        <?php
+                            echo $response['tahapI']['bagianB']['kelas3SD'];
                          ?>
-                          
+
                       </td>
                     </tr>
 
                     <!-- Riwayat Kesehatan Keluarga -->
                     <tr>
-                      <td>C. Riwayat Kesehatan Keluarga</td>
-                      <td>Keterangan</td>
+                      <td style="font-weight:bold; font-size:18px;">C. Riwayat Kesehatan Keluarga</td>
+                      <td style="font-weight:bold; font-size:18px;">Keterangan</td>
                     </tr>
                     <tr>
                       <td>Tuberkulosis(TBC)</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['tbc'] != ""){
-                              echo @$_SESSION['tbc'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['tbc'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Diabetes Mellitus</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['diabetes'] != ""){
-                              echo @$_SESSION['diabetes'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['diabetes'];
                          ?>
-                          
+
                       </td>
-                    </tr>                                      
+                    </tr>
                     <tr>
                       <td>Hepatitis/sakit kuning</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['hepatitis'] != ""){
-                              echo @$_SESSION['hepatitis'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['hepatitis'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Asma/bengek</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['asma'] != ""){
-                              echo @$_SESSION['asma'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['asma'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Penyakit jantung</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['penyakit_jantung'] != ""){
-                              echo @$_SESSION['penyakit_jantung'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['penyakit_jantung'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Stroke/lumpuh</td>
-                      <td>
-                        
-                        <?php 
-                           if($_SESSION['stroke'] != ""){
-                              echo @$_SESSION['stroke'];
-                           } 
-                         ?>
-                          
+                      <td><?php
+                          echo $response['tahapI']['bagianC']['stroke'];
+                       ?>
                       </td>
                     </tr>
                     <tr>
                       <td>Obesitas/gemuk sekali</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['obesitas'] != ""){
-                              echo @$_SESSION['obesitas'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['obesitas'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Tekanan darah tinggi</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['tekanan_darah'] != ""){
-                              echo @$_SESSION['tekanan_darah'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['tekanan_darah'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Kanker tumor ganas</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['kanker_tumor'] != ""){
-                              echo @$_SESSION['kanker_tumor'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['kanker_tumor'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Anemia</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['anemia'] != ""){
-                              echo @$_SESSION['anemia'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['anemia'];
                          ?>
-                          
                       </td>
                     </tr>
                     <tr>
                       <td>Thalasemia</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['thalasemia'] != ""){
-                              echo @$_SESSION['thalasemia'];
-                           } 
-                         ?>
-                          
+                         <?php
+                             echo $response['tahapI']['bagianC']['thalasemia'];
+                          ?>
                       </td>
                     </tr>
                     <tr>
                       <td>Hemofilia</td>
                       <td>
-                        
-                        <?php 
-                           if($_SESSION['hemofilia'] != ""){
-                              echo @$_SESSION['hemofilia'];
-                           } 
+                        <?php
+                            echo $response['tahapI']['bagianC']['hemofilia'];
                          ?>
-                          
                       </td>
                     </tr>
 
                     <!-- Gaya Hidup -->
                     <tr>
-                      <td>D. Gaya Hidup</td>
-                      <td>Keterangan</td>
+                      <td style="font-weight:bold; font-size:18px;">D. Gaya Hidup</td>
+                      <td style="font-weight:bold; font-size:18px;">Keterangan</td>
                     </tr>
                        <tr>
                         <td>Sarapan</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['sarapan'] != ""){
-                                echo @$_SESSION['sarapan'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianD']['sarapan'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Jajan</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['jajan'] != ""){
-                                echo @$_SESSION['jajan'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianD']['jajan'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Risiko merokok</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['risiko_merokok'] != ""){
-                                echo @$_SESSION['risiko_merokok'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianD']['risiko_merokok'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Risiko minum minuman beralkohol dan Napza</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['risiko_minum'] != ""){
-                                echo @$_SESSION['risiko_minum'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianD']['risiko_minum'];
                            ?>
-                            
                         </td>
                       </tr>
 
                       <!-- Kesehatan Reproduksi -->
                       <tr>
-                        <td>E. Kesehatan Reproduksi</td>
-                        <td>Keterangan</td>
+                        <td style="font-weight:bold; font-size:18px;">E. Kesehatan Reproduksi</td>
+                        <td style="font-weight:bold; font-size:18px;">Keterangan</td>
                       </tr>
                       <tr>
                         <td>Masalah Pubertas</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['pubertas'] != ""){
-                                echo @$_SESSION['pubertas'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianE']['pubertas'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Risiko IMS</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['ims'] != ""){
-                                echo @$_SESSION['ims'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianE']['risiko_ims'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Risiko kekerasan seksual</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['seksual'] != ""){
-                                echo @$_SESSION['seksual'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianE']['kekerasan_seksual'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Gangguan menstruasi</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['menstruasi'] != ""){
-                                echo @$_SESSION['menstruasi'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianE']['gangguan_menstruasi'];
                            ?>
-                            
                         </td>
                       </tr>
 
                       <tr>
-                        <td>F. Kesehatan Mental Emosional Skor Kesulitan</td>
-                        <td>Keterangan</td>
-                      </tr>           
+                        <td style="font-weight:bold; font-size:18px;">F. Kesehatan Mental Emosional Skor Kesulitan</td>
+                        <td style="font-weight:bold; font-size:18px;">Keterangan</td>
+                      </tr>
 
                       <tr>
                         <td>Gejala emosional (E)</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['emosional'] != ""){
-                                echo @$_SESSION['emosional'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianF']['gejala_emosional'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Masalah perilaku (C)</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['perilaku'] != ""){
-                                echo @$_SESSION['perilaku'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianF']['masalah_perilaku'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Hiperaktifitas (H)</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['hiperaktifitas'] != ""){
-                                echo @$_SESSION['hiperaktifitas'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianF']['hiperaktifitas'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Masalah teman sebaya (P)</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['teman_sebaya'] != ""){
-                                echo @$_SESSION['teman_sebaya'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianF']['teman_sebaya'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Perilaku proposial (Pr)</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['proposial'] != ""){
-                                echo @$_SESSION['proposial'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianF']['perilaku_prososial'];
                            ?>
-                            
                         </td>
                       </tr>
 
                       <tr>
-                        <td>G. Kesehatan Intelegensia</td>
-                        <td>Keterangan</td>
+                        <td style="font-weight:bold; font-size:18px;">G. Kesehatan Intelegensia</td>
+                        <td style="font-weight:bold; font-size:18px;">Keterangan</td>
                       </tr>
                       <tr>
                         <td>Visual</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['visual'] != ""){
-                                echo @$_SESSION['visual'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianG']['visual'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Audio</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['audio'] != ""){
-                                echo @$_SESSION['audio'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianG']['audio'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Kinestetik</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['kinestetik'] != ""){
-                                echo @$_SESSION['kinestetik'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianG']['kinestetik'];
                            ?>
-                            
                         </td>
                       </tr>
                       <tr>
                         <td>Dominasi otak</td>
                         <td>
-                          
-                          <?php 
-                             if($_SESSION['dominan_otak'] != ""){
-                                echo @$_SESSION['dominan_otak'];
-                             } 
+                          <?php
+                              echo $response['tahapI']['bagianG']['dominan_otak'];
                            ?>
-                            
                         </td>
                       </tr>
 
-                        
-                    
+
+
                 	</thead>
+                </table>
+                <table class="table table-bordered">
+                  <h3>Laporan Pemeriksaan Fisik</h3>
+                  <thead>
+                    <tr>
+                      <td style="font-weight:bold; font-size:18px;">B. Pemeriksaan Status Gizi</td>
+                      <td style="font-weight:bold; font-size:18px;">Keterangan</td>
+                    </tr>
+                    <tr>
+                      <td> Berat badan</td>
+                      <td>
+                        <?php
+                          echo $response['tahapII']['bagianB']['berat_badan'];
+                        ?>&nbsp; Kg
+                     </td>
+                    </tr>
+                    <tr>
+                      <td> Tinggi badan</td>
+                      <td>
+                        <?php
+                          echo $response['tahapII']['bagianB']['tinggi_badan'];
+                        ?>&nbsp; Cm
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> IMT </td>
+                      <td>
+                        <?php
+                          echo $response['tahapII']['bagianB']['indeks_masa_tubuh'];
+                        ?>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td> Kategori </td>
+                      <td>
+                        <?php
+                          echo $response['tahapII']['bagianB']['kategori_imt'];
+                        ?>
+                      </td>
+                    </tr>
+                  </thead>
                 </table>
 
                 <h3>Tanda Tangan</h3>
@@ -690,11 +608,11 @@
                   </tr>
                 </table>
 
-  
+
                	<a href="export_kuesioner.php?nis=<?php echo $data['nis'] ?>" target="_blank" class="btn btn-success" onclick="window.print()">Cetak Data</a>
                 </div>
                 </form>
-            </div>    
+            </div>
         </div>
 </div>
 
@@ -716,11 +634,11 @@
   <script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
   <script src="../dist/modules/moment.min.js"></script>
   <script src="../dist/js/stisla.js"></script>
-  
+
   <!-- JS Libraies -->
 
   <!-- Page Specific JS File -->
-  
+
   <!-- Template JS File -->
   <script src="../dist/js/scripts.js"></script>
   <script src="../dist/js/custom.js"></script>

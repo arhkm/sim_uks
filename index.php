@@ -1,4 +1,4 @@
-<?php  
+<?php
 
     @session_start();
     include 'config/koneksi.php';
@@ -29,9 +29,9 @@
 
     }
 
-?>  
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow:hidden;">
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -48,9 +48,9 @@
   <link rel="stylesheet" href="dist/css/style.css">
   <style type="text/css">
     #backLogin{
-      background: url(dist/img/2.png);
-      background-size: 900px;
+      background: url(dist/img/piringku.jpg);
       background-repeat: no-repeat;
+      background-size: 70% 100%;
     }
   </style>
 </head>
@@ -59,13 +59,13 @@
   <div id="app">
     <section class="section">
       <div class="container mt-5">
-        <div class="row">
+        <div class="row" style="margin-top:-35px;">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-8">
             <div class="login-brand">
               <img src="dist/img/logo.png" alt="logo" width="100" class="shadow-light rounded-circle">
             </div>
 
-            <div class="card card-primary">
+            <div class="card card-primary" style="background-color:#f3f1ef;">
               <div class="card-header"><h4>Login - SIM / KUESIONER UKS</h4></div>
 
               <div class="card-body">
@@ -104,7 +104,7 @@
                       Login
                     </button>
                   </div>
-                </form> 
+                </form>
               </div>
             </div>
           </div>
@@ -121,17 +121,17 @@
   <script src="dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
   <script src="dist/modules/moment.min.js"></script>
   <script src="dist/js/stisla.js"></script>
-  
+
   <!-- JS Libraies -->
   <!-- JS Libraies -->
   <script src="dist/modules/sweetalert/sweetalert.min.js"></script>
 
   <!-- Page Specific JS File -->
   <script src="dist/js/page/modules-sweetalert.js"></script>
-  
+
 
   <!-- Page Specific JS File -->
-  
+
   <!-- Template JS File -->
   <script src="dist/js/scripts.js"></script>
   <script src="dist/js/custom.js"></script>
